@@ -1,0 +1,785 @@
+
+/* =========================================
+   PATTERNLAB - COMPACT DARK UI
+========================================= */
+
+:root {
+    --bg: #0b0d12;
+    --surface: #121620;
+    --surface-light: #191f2b;
+    --surface-hover: #202838;
+
+    --border: #293243;
+
+    --text: #f1f5f9;
+    --muted: #8995a8;
+
+    --accent: #8b7cff;
+    --accent-hover: #a196ff;
+    --accent-soft: rgba(139, 124, 255, 0.13);
+
+    --green: #36d399;
+    --red: #fb7185;
+    --yellow: #fbbf24;
+    --blue: #60a5fa;
+
+    --radius: 10px;
+}
+
+/* =========================================
+   RESET
+========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    background: var(--bg);
+    color: var(--text);
+    font-family: Inter, "Segoe UI", Arial, sans-serif;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+button,
+input,
+select {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+button:disabled {
+    cursor: not-allowed;
+    opacity: 0.4;
+}
+
+/* =========================================
+   APP CONTAINER
+========================================= */
+
+.app-container {
+    width: 100%;
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 14px 22px;
+}
+
+/* =========================================
+   HEADER
+========================================= */
+
+.header {
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 12px;
+}
+
+.header h1 {
+    font-size: 23px;
+    font-weight: 750;
+    letter-spacing: -0.8px;
+    color: var(--text);
+}
+
+.header-controls {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.control-group {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.control-group label {
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+select {
+    min-width: 125px;
+    padding: 8px 28px 8px 10px;
+    color: var(--text);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    outline: none;
+    cursor: pointer;
+}
+
+select:focus,
+input:focus {
+    border-color: var(--accent);
+}
+
+select option {
+    background: var(--surface);
+    color: var(--text);
+}
+
+.speed-control {
+    min-width: 155px;
+}
+
+.speed-control input {
+    width: 90px;
+    accent-color: var(--accent);
+    cursor: pointer;
+}
+
+#speed-label {
+    color: var(--accent);
+    font-weight: 700;
+}
+
+/* =========================================
+   INPUT SECTION
+========================================= */
+
+.input-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    align-items: end;
+    gap: 12px;
+    padding: 12px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 12px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 0;
+}
+
+.input-group label {
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.input-group input {
+    width: 100%;
+    min-width: 0;
+    height: 36px;
+    padding: 0 10px;
+    background: #0d1119;
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    outline: none;
+    font-family: "Consolas", "Courier New", monospace;
+    font-size: 13px;
+}
+
+.input-group input::placeholder {
+    color: #596477;
+}
+
+.input-actions {
+    display: flex;
+    gap: 7px;
+}
+
+.input-status {
+    grid-column: 1 / -1;
+    min-height: 0;
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.input-status:empty {
+    display: none;
+}
+
+/* =========================================
+   BUTTONS
+========================================= */
+
+.primary-btn,
+.secondary-btn {
+    min-height: 34px;
+    padding: 0 14px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    transition: 0.2s ease;
+}
+
+.primary-btn {
+    background: var(--accent);
+    border: 1px solid var(--accent);
+    color: #fff;
+}
+
+.primary-btn:hover:not(:disabled) {
+    background: var(--accent-hover);
+    border-color: var(--accent-hover);
+    transform: translateY(-1px);
+}
+
+.secondary-btn {
+    background: var(--surface-light);
+    border: 1px solid var(--border);
+    color: var(--text);
+}
+
+.secondary-btn:hover:not(:disabled) {
+    background: var(--surface-hover);
+    border-color: var(--accent);
+}
+
+/* =========================================
+   MAIN WORKSPACE
+========================================= */
+
+.workspace {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: 12px;
+    align-items: stretch;
+    margin-bottom: 12px;
+}
+
+.panel {
+    min-width: 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 13px;
+}
+
+.visual-panel,
+.algorithm-panel {
+    min-height: 410px;
+}
+
+/* =========================================
+   PANEL HEADERS
+========================================= */
+
+.panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 12px;
+}
+
+.panel-header h2 {
+    font-size: 14px;
+    font-weight: 750;
+}
+
+.phase-badge,
+.detail-badge {
+    padding: 3px 9px;
+    border-radius: 20px;
+    background: var(--surface-light);
+    color: var(--muted);
+    border: 1px solid var(--border);
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.phase-badge.active {
+    color: var(--accent);
+    background: var(--accent-soft);
+    border-color: rgba(139, 124, 255, 0.3);
+}
+
+.phase-badge.success {
+    color: var(--green);
+    background: rgba(54, 211, 153, 0.1);
+    border-color: rgba(54, 211, 153, 0.3);
+}
+
+/* =========================================
+   VISUALIZATION
+========================================= */
+
+.visualization {
+    min-height: 265px;
+    width: 100%;
+    padding: 12px 6px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow-x: auto;
+    overflow-y: hidden;
+    background: #0d1119;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+}
+
+.visualization-empty {
+    min-height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 15px;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+/* =========================================
+   VISUALIZATION CHARACTER CELLS
+========================================= */
+
+.visualization .character,
+.visualization .char-cell,
+.visualization .text-cell,
+.visualization .pattern-cell {
+    transition: all 0.2s ease;
+}
+
+/* Common character row layouts */
+
+.visualization .character-row,
+.visualization .text-row,
+.visualization .pattern-row {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    margin: 7px 0;
+    min-width: max-content;
+}
+
+.visualization .character,
+.visualization .char-cell,
+.visualization .text-cell,
+.visualization .pattern-cell {
+    min-width: 27px;
+    height: 32px;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--surface-light);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    color: var(--text);
+    font-family: Consolas, monospace;
+    font-weight: 700;
+    font-size: 12px;
+}
+
+.visualization .active,
+.visualization .current,
+.visualization .comparing {
+    background: rgba(139, 124, 255, 0.2);
+    border-color: var(--accent);
+    color: #c4baff;
+}
+
+.visualization .matched,
+.visualization .match {
+    background: rgba(54, 211, 153, 0.15);
+    border-color: var(--green);
+    color: var(--green);
+}
+
+.visualization .mismatch {
+    background: rgba(251, 113, 133, 0.13);
+    border-color: var(--red);
+    color: var(--red);
+}
+
+/* =========================================
+   PLAYBACK CONTROLS
+========================================= */
+
+.playback-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-top: 12px;
+}
+
+.playback-controls button {
+    flex: 1;
+    min-width: 65px;
+}
+
+/* =========================================
+   PROGRESS
+========================================= */
+
+.progress-section {
+    margin-top: 12px;
+}
+
+.progress-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 6px;
+    color: var(--muted);
+    font-size: 11px;
+}
+
+#progress-text {
+    color: var(--text);
+    font-weight: 700;
+}
+
+.progress-bar {
+    height: 5px;
+    overflow: hidden;
+    background: var(--surface-light);
+    border-radius: 20px;
+}
+
+.progress-fill {
+    width: 0%;
+    height: 100%;
+    background: var(--accent);
+    border-radius: 20px;
+    transition: width 0.2s ease;
+}
+
+/* =========================================
+   ALGORITHM PANEL
+========================================= */
+
+.operation-section {
+    padding: 10px;
+    margin-bottom: 12px;
+    background: #0d1119;
+    border: 1px solid var(--border);
+    border-radius: 7px;
+}
+
+.operation-section h3 {
+    font-size: 13px;
+    font-weight: 750;
+    margin-bottom: 4px;
+    color: var(--accent);
+}
+
+.operation-section p {
+    color: #b0bbca;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.pseudocode-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.pseudocode-header h3 {
+    font-size: 13px;
+}
+
+#detail-title {
+    color: var(--muted);
+    font-size: 10px;
+}
+
+.pseudocode {
+    min-height: 205px;
+    max-height: 265px;
+    overflow-y: auto;
+    overflow-x: auto;
+    padding: 10px;
+    background: #0d1119;
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 11px;
+    line-height: 1.8;
+}
+
+/* =========================================
+   PSEUDOCODE ACTIVE LINES
+========================================= */
+
+.pseudocode .active,
+.pseudocode .active-line,
+.pseudocode .highlight,
+.pseudocode .current-line {
+    display: block;
+    padding: 2px 7px;
+    margin: 1px 0;
+    color: #d8d2ff;
+    background: rgba(139, 124, 255, 0.16);
+    border-left: 3px solid var(--accent);
+    border-radius: 3px;
+}
+
+.pseudocode .line-number {
+    display: inline-block;
+    min-width: 22px;
+    color: #69758a;
+    user-select: none;
+}
+
+.pseudocode .keyword {
+    color: #c4b5fd;
+}
+
+.pseudocode .comment {
+    color: #738198;
+}
+
+/* =========================================
+   ALGORITHM DETAILS
+========================================= */
+
+.algorithm-details {
+    margin-top: 10px;
+    color: #b0bbca;
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+.algorithm-details:empty {
+    display: none;
+}
+
+/* =========================================
+   STATISTICS
+========================================= */
+
+.statistics-section {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.stat-card {
+    min-width: 0;
+    padding: 10px 13px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+}
+
+.stat-card span {
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.stat-card strong {
+    color: var(--accent);
+    font-size: 19px;
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+}
+
+/* =========================================
+   LEARNING SECTION
+========================================= */
+
+.learning-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 12px;
+    min-height: auto;
+}
+
+.learning-section h2,
+.learning-section h3 {
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.learning-section p {
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.footer {
+    text-align: center;
+    color: #647084;
+    font-size: 10px;
+    padding: 5px 0 2px;
+}
+
+/* =========================================
+   SCROLLBARS
+========================================= */
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #39445a #111620;
+}
+
+*::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+*::-webkit-scrollbar-track {
+    background: #111620;
+}
+
+*::-webkit-scrollbar-thumb {
+    background: #39445a;
+    border-radius: 10px;
+}
+
+/* =========================================
+   RESPONSIVE TABLET
+========================================= */
+
+@media (max-width: 900px) {
+
+    .app-container {
+        padding: 12px;
+    }
+
+    .workspace {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .visual-panel,
+    .algorithm-panel {
+        min-height: 390px;
+    }
+
+    .header-controls {
+        gap: 10px;
+    }
+
+    .speed-control {
+        min-width: 130px;
+    }
+}
+
+/* =========================================
+   RESPONSIVE MOBILE
+========================================= */
+
+@media (max-width: 650px) {
+
+    .header {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .header-controls {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .input-section {
+        grid-template-columns: 1fr;
+    }
+
+    .input-actions {
+        width: 100%;
+    }
+
+    .input-actions button {
+        flex: 1;
+    }
+
+    .workspace {
+        grid-template-columns: 1fr;
+    }
+
+    .visual-panel,
+    .algorithm-panel {
+        min-height: auto;
+    }
+
+    .visualization {
+        min-height: 220px;
+    }
+
+    .statistics-section {
+        grid-template-columns: 1fr;
+        gap: 7px;
+    }
+
+    .learning-section {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .stat-card {
+        padding: 9px 12px;
+    }
+
+    .stat-card strong {
+        font-size: 16px;
+    }
+
+}
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 380px) {
+
+    .app-container {
+        padding: 8px;
+    }
+
+    .header h1 {
+        font-size: 20px;
+    }
+
+    .header-controls {
+        flex-wrap: wrap;
+    }
+
+    .control-group {
+        gap: 5px;
+    }
+
+    .speed-control input {
+        width: 65px;
+    }
+
+    .panel {
+        padding: 10px;
+    }
+
+    .playback-controls button {
+        padding: 0 8px;
+    }
+
+}

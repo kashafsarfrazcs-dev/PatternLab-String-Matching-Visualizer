@@ -1,0 +1,253 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0b0d12">
+    <title>PatternLab | String Matching Visualizer</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+
+    <div class="app-container">
+
+        <!-- HEADER -->
+        <header class="header">
+            <h1>PatternLab</h1>
+
+            <div class="header-controls">
+
+                <div class="control-group">
+                    <label for="algorithm">Algorithm</label>
+                    <select id="algorithm">
+                        <option value="kmp">KMP</option>
+                        <option value="rk">Rabin-Karp</option>
+                    </select>
+                </div>
+
+                <div class="control-group speed-control">
+                    <label for="speed">
+                        Speed <span id="speed-label">1x</span>
+                    </label>
+                    <input
+                        type="range"
+                        id="speed"
+                        min="1"
+                        max="5"
+                        value="3"
+                        step="1"
+                    >
+                </div>
+
+            </div>
+        </header>
+
+
+        <!-- INPUT SECTION -->
+        <section class="input-section">
+
+            <div class="input-group">
+                <label for="text-input">Text</label>
+                <input
+                    type="text"
+                    id="text-input"
+                    placeholder="Enter your text..."
+                    value="ABABDABACDABABCABAB"
+                    autocomplete="off"
+                >
+            </div>
+
+            <div class="input-group">
+                <label for="pattern-input">Pattern</label>
+                <input
+                    type="text"
+                    id="pattern-input"
+                    placeholder="Enter pattern..."
+                    value="ABABCABAB"
+                    autocomplete="off"
+                >
+            </div>
+
+            <div class="input-actions">
+                <button id="example-btn" class="secondary-btn">
+                    Example
+                </button>
+
+                <button id="start-btn" class="primary-btn">
+                    Start
+                </button>
+            </div>
+
+            <p id="input-status" class="input-status"></p>
+
+        </section>
+
+
+        <!-- MAIN WORKSPACE -->
+        <main class="workspace">
+
+            <!-- LEFT: VISUALIZATION -->
+            <section class="visual-panel panel">
+
+                <div class="panel-header">
+                    <h2>Visualization</h2>
+                    <span id="phase-badge" class="phase-badge">
+                        Ready
+                    </span>
+                </div>
+
+                <div id="visualization" class="visualization">
+                    <div class="visualization-empty">
+                        <p>Enter text and pattern, then press Start.</p>
+                    </div>
+                </div>
+
+                <!-- PLAYBACK CONTROLS -->
+                <div class="playback-controls">
+
+                    <button id="play-btn" class="primary-btn">
+                        Play
+                    </button>
+
+                    <button id="step-btn" class="secondary-btn">
+                        Step
+                    </button>
+
+                    <button id="pause-btn" class="secondary-btn">
+                        Pause
+                    </button>
+
+                    <button id="reset-btn" class="secondary-btn">
+                        Reset
+                    </button>
+
+                </div>
+
+                <!-- PROGRESS -->
+                <div class="progress-section">
+
+                    <div class="progress-info">
+                        <span>Progress</span>
+                        <span id="progress-text">0 / 0</span>
+                    </div>
+
+                    <div
+                        id="progress-bar"
+                        class="progress-bar"
+                        role="progressbar"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                        aria-valuenow="0"
+                    >
+                        <div id="progress-fill" class="progress-fill"></div>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- RIGHT: ALGORITHM -->
+            <section class="algorithm-panel panel">
+
+                <div class="panel-header">
+                    <h2>Algorithm</h2>
+                    <span id="detail-badge" class="detail-badge">
+                        KMP
+                    </span>
+                </div>
+
+                <div class="operation-section">
+
+                    <h3 id="operation-title">
+                        Waiting to start
+                    </h3>
+
+                    <p id="operation-description">
+                        Start the algorithm to see each operation.
+                    </p>
+
+                </div>
+
+                <div class="pseudocode-section">
+
+                    <div class="pseudocode-header">
+                        <h3>Pseudocode</h3>
+                        <span id="detail-title">KMP Algorithm</span>
+                    </div>
+
+                    <div
+                        id="pseudocode"
+                        class="pseudocode"
+                    >
+                        <!-- JavaScript renders pseudocode here -->
+                    </div>
+
+                </div>
+
+                <div
+                    id="algorithm-details"
+                    class="algorithm-details"
+                >
+                    <!-- JavaScript renders algorithm details here -->
+                </div>
+
+            </section>
+
+        </main>
+
+
+        <!-- STATISTICS -->
+        <section class="statistics-section">
+
+            <div class="stat-card">
+                <span>Comparisons</span>
+                <strong id="comparisons-stat">0</strong>
+            </div>
+
+            <div class="stat-card">
+                <span>Hash Operations</span>
+                <strong id="hash-stat">0</strong>
+            </div>
+
+            <div class="stat-card">
+                <span>Matches</span>
+                <strong id="matches-stat">0</strong>
+            </div>
+
+        </section>
+
+
+        <!-- LEARNING SECTION -->
+        <section class="learning-section panel">
+
+            <div class="learning-content">
+                <h2 id="concept-heading">Understanding the Algorithm</h2>
+
+                <p id="concept-description">
+                    Explore how the selected string matching algorithm
+                    searches for a pattern inside a text.
+                </p>
+            </div>
+
+            <div class="complexity-content">
+                <h3>Time Complexity</h3>
+
+                <p id="complexity-description">
+                    Complexity information will appear here.
+                </p>
+            </div>
+
+        </section>
+
+        <footer class="footer">
+            PatternLab · Interactive String Matching Visualizer
+        </footer>
+
+    </div>
+
+</body>
+</html>
