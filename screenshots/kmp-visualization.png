@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<!-- saved from url=(0032)file:///E:/PatternLab/index.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0b0d12">
+    <title>PatternLab | String Matching Visualizer</title>
+    <link rel="stylesheet" href="./kmp-visualization_files/style.css">
+    <script src="./kmp-visualization_files/script.js" defer=""></script>
+</head>
+
+<body>
+
+    <div class="app-container">
+
+        <!-- HEADER -->
+        <header class="header">
+            <h1>PatternLab</h1>
+
+            <div class="header-controls">
+
+                <div class="control-group">
+                    <label for="algorithm">Algorithm</label>
+                    <select id="algorithm">
+                        <option value="kmp">KMP</option>
+                        <option value="rk">Rabin-Karp</option>
+                    </select>
+                </div>
+
+                <div class="control-group speed-control">
+                    <label for="speed">
+                        Speed <span id="speed-label">2x</span>
+                    </label>
+                    <input type="range" id="speed" min="1" max="5" value="3" step="1">
+                </div>
+
+            </div>
+        </header>
+
+
+        <!-- INPUT SECTION -->
+        <section class="input-section">
+
+            <div class="input-group">
+                <label for="text-input">Text</label>
+                <input type="text" id="text-input" placeholder="Enter your text..." value="ABABDABACDABABCABAB" autocomplete="off">
+            </div>
+
+            <div class="input-group">
+                <label for="pattern-input">Pattern</label>
+                <input type="text" id="pattern-input" placeholder="Enter pattern..." value="ABABCABAB" autocomplete="off">
+            </div>
+
+            <div class="input-actions">
+                <button id="example-btn" class="secondary-btn">
+                    Example
+                </button>
+
+                <button id="start-btn" class="primary-btn">
+                    Start
+                </button>
+            </div>
+
+            <p id="input-status" class="input-status"></p>
+
+        </section>
+
+
+        <!-- MAIN WORKSPACE -->
+        <main class="workspace">
+
+            <!-- LEFT: VISUALIZATION -->
+            <section class="visual-panel panel">
+
+                <div class="panel-header">
+                    <h2>Visualization</h2>
+                    <span id="phase-badge" class="phase-badge success">Completed</span>
+                </div>
+
+                <div id="visualization" class="visualization">
+
+        <div style="margin-bottom:12px;">
+
+            <div style="
+                display:flex;
+                justify-content:space-between;
+                margin-bottom:7px;
+                color:#8995a8;
+                font-size:10px;
+            ">
+                <span>TEXT</span>
+                <span>19 characters</span>
+            </div>
+
+            <div class="character-row">
+                
+            <div class="char-cell" title="Text index 0">
+                A
+            </div>
+        
+            <div class="char-cell" title="Text index 1">
+                B
+            </div>
+        
+            <div class="char-cell" title="Text index 2">
+                A
+            </div>
+        
+            <div class="char-cell" title="Text index 3">
+                B
+            </div>
+        
+            <div class="char-cell" title="Text index 4">
+                D
+            </div>
+        
+            <div class="char-cell" title="Text index 5">
+                A
+            </div>
+        
+            <div class="char-cell" title="Text index 6">
+                B
+            </div>
+        
+            <div class="char-cell" title="Text index 7">
+                A
+            </div>
+        
+            <div class="char-cell" title="Text index 8">
+                C
+            </div>
+        
+            <div class="char-cell" title="Text index 9">
+                D
+            </div>
+        
+            <div class="char-cell" title="Text index 10">
+                A
+            </div>
+        
+            <div class="char-cell" title="Text index 11">
+                B
+            </div>
+        
+            <div class="char-cell" title="Text index 12">
+                A
+            </div>
+        
+            <div class="char-cell" title="Text index 13">
+                B
+            </div>
+        
+            <div class="char-cell" title="Text index 14">
+                C
+            </div>
+        
+            <div class="char-cell" title="Text index 15">
+                A
+            </div>
+        
+            <div class="char-cell" title="Text index 16">
+                B
+            </div>
+        
+            <div class="char-cell" title="Text index 17">
+                A
+            </div>
+        
+            <div class="char-cell" title="Text index 18">
+                B
+            </div>
+        
+            </div>
+
+        </div>
+
+
+        <div>
+
+            <div style="
+                display:flex;
+                justify-content:space-between;
+                margin-bottom:7px;
+                color:#8995a8;
+                font-size:10px;
+            ">
+                <span>PATTERN</span>
+                <span>9 characters</span>
+            </div>
+
+            <div class="character-row">
+                
+            <div class="char-cell" title="Pattern index 0">
+                A
+            </div>
+        
+            <div class="char-cell" title="Pattern index 1">
+                B
+            </div>
+        
+            <div class="char-cell" title="Pattern index 2">
+                A
+            </div>
+        
+            <div class="char-cell" title="Pattern index 3">
+                B
+            </div>
+        
+            <div class="char-cell" title="Pattern index 4">
+                C
+            </div>
+        
+            <div class="char-cell" title="Pattern index 5">
+                A
+            </div>
+        
+            <div class="char-cell" title="Pattern index 6">
+                B
+            </div>
+        
+            <div class="char-cell" title="Pattern index 7">
+                A
+            </div>
+        
+            <div class="char-cell" title="Pattern index 8">
+                B
+            </div>
+        
+            </div>
+
+        </div>
+
+        
+            <div class="lps-section" style="margin-top:18px;">
+                <div style="color:#8995a8;font-size:11px;margin-bottom:7px;">
+                    LPS TABLE
+                </div>
+
+                <div class="character-row">
+                    
+                        <div style="
+                            display:flex;
+                            flex-direction:column;
+                            align-items:center;
+                            gap:4px;
+                        ">
+                            <span style="font-size:9px;color:#8995a8;">
+                                0
+                            </span>
+
+                            <div class="char-cell ">
+                                0
+                            </div>
+                        </div>
+                    
+                        <div style="
+                            display:flex;
+                            flex-direction:column;
+                            align-items:center;
+                            gap:4px;
+                        ">
+                            <span style="font-size:9px;color:#8995a8;">
+                                1
+                            </span>
+
+                            <div class="char-cell ">
+                                0
+                            </div>
+                        </div>
+                    
+                        <div style="
+                            display:flex;
+                            flex-direction:column;
+                            align-items:center;
+                            gap:4px;
+                        ">
+                            <span style="font-size:9px;color:#8995a8;">
+                                2
+                            </span>
+
+                            <div class="char-cell ">
+                                1
+                            </div>
+                        </div>
+                    
+                        <div style="
+                            display:flex;
+                            flex-direction:column;
+                            align-items:center;
+                            gap:4px;
+                        ">
+                            <span style="font-size:9px;color:#8995a8;">
+                                3
+                            </span>
+
+                            <div class="char-cell ">
+                                2
+                            </div>
+                        </div>
+                    
+                        <div style="
+                            display:flex;
+                            flex-direction:column;
+                            align-items:center;
+                            gap:4px;
+                        ">
+                            <span style="font-size:9px;color:#8995a8;">
+                                4
+                            </span>
+
+                            <div class="char-cell ">
+                                0
+                            </div>
+                        </div>
+                    
+                        <div style="
+                            display:flex;
+                            flex-direction:column;
+                            align-items:center;
+                            gap:4px;
+                        ">
+                            <span style="font-size:9px;color:#8995a8;">
+                                5
+                            </span>
+
+                            <div class="char-cell ">
+                                1
+                            </div>
+                        </div>
+                    
+                        <div style="
+                            display:flex;
+                            flex-direction:column;
+                            align-items:center;
+                            gap:4px;
+                        ">
+                            <span style="font-size:9px;color:#8995a8;">
+                                6
+                            </span>
+
+                            <div class="char-cell ">
+                                2
+                            </div>
+                        </div>
+                    
+                        <div style="
+                            display:flex;
+                            flex-direction:column;
+                            align-items:center;
+                            gap:4px;
+                        ">
+                            <span style="font-size:9px;color:#8995a8;">
+                                7
+                            </span>
+
+                            <div class="char-cell ">
+                                3
+                            </div>
+                        </div>
+                    
+                        <div style="
+                            display:flex;
+                            flex-direction:column;
+                            align-items:center;
+                            gap:4px;
+                        ">
+                            <span style="font-size:9px;color:#8995a8;">
+                                8
+                            </span>
+
+                            <div class="char-cell ">
+                                4
+                            </div>
+                        </div>
+                    
+                </div>
+            </div>
+        
+
+        
+
+    </div>
+
+                <!-- PLAYBACK CONTROLS -->
+                <div class="playback-controls">
+
+                    <button id="play-btn" class="primary-btn">
+                        Play
+                    </button>
+
+                    <button id="step-btn" class="secondary-btn">
+                        Step
+                    </button>
+
+                    <button id="pause-btn" class="secondary-btn" disabled="">
+                        Pause
+                    </button>
+
+                    <button id="reset-btn" class="secondary-btn">
+                        Reset
+                    </button>
+
+                </div>
+
+                <!-- PROGRESS -->
+                <div class="progress-section">
+
+                    <div class="progress-info">
+                        <span>Progress</span>
+                        <span id="progress-text">52 / 52</span>
+                    </div>
+
+                    <div id="progress-bar" class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100">
+                        <div id="progress-fill" class="progress-fill" style="width: 100%;"></div>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- RIGHT: ALGORITHM -->
+            <section class="algorithm-panel panel">
+
+                <div class="panel-header">
+                    <h2>Algorithm</h2>
+                    <span id="detail-badge" class="detail-badge">KMP</span>
+                </div>
+
+                <div class="operation-section">
+
+                    <h3 id="operation-title">KMP Search Completed</h3>
+
+                    <p id="operation-description">Search completed. Found 1 match(es).</p>
+
+                </div>
+
+                <div class="pseudocode-section">
+
+                    <div class="pseudocode-header">
+                        <h3>Pseudocode</h3>
+                        <span id="detail-title">Knuth-Morris-Pratt</span>
+                    </div>
+
+                    <div id="pseudocode" class="pseudocode">
+            <div class="">
+                <span class="line-number">1.</span>
+                <span>Build the LPS array</span>
+            </div>
+        
+            <div class="">
+                <span class="line-number">2.</span>
+                <span>i = 0, j = 0</span>
+            </div>
+        
+            <div class="">
+                <span class="line-number">3.</span>
+                <span>while i &lt; n:</span>
+            </div>
+        
+            <div class="">
+                <span class="line-number">4.</span>
+                <span>    if text[i] == pattern[j]:</span>
+            </div>
+        
+            <div class="">
+                <span class="line-number">5.</span>
+                <span>        i++, j++</span>
+            </div>
+        
+            <div class="">
+                <span class="line-number">6.</span>
+                <span>        if j == m:</span>
+            </div>
+        
+            <div class="">
+                <span class="line-number">7.</span>
+                <span>            Report match</span>
+            </div>
+        
+            <div class="">
+                <span class="line-number">8.</span>
+                <span>            j = LPS[j - 1]</span>
+            </div>
+        
+            <div class="">
+                <span class="line-number">9.</span>
+                <span>    else if j &gt; 0:</span>
+            </div>
+        
+            <div class="">
+                <span class="line-number">10.</span>
+                <span>        j = LPS[j - 1]</span>
+            </div>
+        
+            <div class="">
+                <span class="line-number">11.</span>
+                <span>    else:</span>
+            </div>
+        
+            <div class="">
+                <span class="line-number">12.</span>
+                <span>        i++</span>
+            </div>
+        </div>
+
+                </div>
+
+                <div id="algorithm-details" class="algorithm-details">Total character comparisons: 32. Total matches: 1.</div>
+
+            </section>
+
+        </main>
+
+
+        <!-- STATISTICS -->
+        <section class="statistics-section">
+
+            <div class="stat-card">
+                <span>Comparisons</span>
+                <strong id="comparisons-stat">32</strong>
+            </div>
+
+            <div class="stat-card">
+                <span>Hash Operations</span>
+                <strong id="hash-stat">0</strong>
+            </div>
+
+            <div class="stat-card">
+                <span>Matches</span>
+                <strong id="matches-stat">1</strong>
+            </div>
+
+        </section>
+
+
+        <!-- LEARNING SECTION -->
+        <section class="learning-section panel">
+
+            <div class="learning-content">
+                <h2 id="concept-heading">Knuth-Morris-Pratt</h2>
+
+                <p id="concept-description">KMP uses the Longest Prefix Suffix (LPS) table to avoid unnecessary comparisons. When a mismatch occurs, it shifts the pattern intelligently instead of restarting from the beginning.</p>
+            </div>
+
+            <div class="complexity-content">
+                <h3>Time Complexity</h3>
+
+                <p id="complexity-description">O(n + m) time and O(m) extra space.</p>
+            </div>
+
+        </section>
+
+        <footer class="footer">
+            PatternLab · Interactive String Matching Visualizer
+        </footer>
+
+    </div>
+
+
+
+</body></html>
